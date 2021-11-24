@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import debounce from "lodash.debounce";
+import { useCallback, useEffect, useState } from "react";
 import { getBin, updateBin } from "../api/treeApi";
 import {
   addLevelIdsToTree,
@@ -26,15 +27,23 @@ export const useTree = (initialTreeData) => {
     }
   }, []);
 
-  const updateTreeData = useCallback(async (updatedTreeData) => {
-    try {
-      setLoading(true);
-      await updateBin(updatedTreeData);
-    } catch {
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateTreeData = useCallback(
+    debounce(
+      async (updatedTreeData) => {
+        try {
+          setLoading(true);
+          await updateBin(updatedTreeData);
+        } catch {
+        } finally {
+          setLoading(false);
+        }
+      },
+      1000,
+      {}
+    ),
+    []
+  );
 
   useEffect(() => {
     fetchTreeData();
