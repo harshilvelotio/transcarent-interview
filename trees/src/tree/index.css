@@ -13,14 +13,22 @@
 
 ul {
   list-style-type: none;
+  counter-reset: listval;
 }
 
 li {
   margin-top: 10px;
+  counter-increment: listval;
 }
 
 .root-list > li:first-child {
   margin-top: 0;
+}
+
+.tree li:before {
+  display: inline-block;
+  padding-right: 5px;
+  content: counters(listval, ".");
 }
 
 .indentation-level-1,
