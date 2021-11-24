@@ -58,3 +58,18 @@ export const deleteTreeNode = (treeData, levelId) => {
     return mutableCurrentTreeData;
   });
 };
+
+export const alphabetiseTreeData = (treeData) => {
+  const mutableTreeData = [...treeData];
+  mutableTreeData.sort((child1, child2) =>
+    child1.node.localeCompare(child2.node)
+  );
+
+  return mutableTreeData.map((currentTreeData) => {
+    const currentMutableTreeData = { ...currentTreeData };
+    currentMutableTreeData.children = alphabetiseTreeData(
+      currentMutableTreeData.children
+    );
+    return currentMutableTreeData;
+  });
+};
