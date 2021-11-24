@@ -1,3 +1,4 @@
+import { Spinner } from "reactstrap";
 import ToggleSwitch from "../ToggleSwitch";
 import "./index.css";
 import { TreeContext } from "./TreeContext";
@@ -12,6 +13,7 @@ export default function Tree() {
     deleteNode,
     shouldAlphabetiseTree,
     alphabetiseTree,
+    loading,
   } = useTree(initialTreeData);
 
   const renderTree = () =>
@@ -30,6 +32,7 @@ export default function Tree() {
           checked={shouldAlphabetiseTree}
           onChange={alphabetiseTree}
         />
+        {loading ? <Spinner color="primary" /> : null}
         <ul className="root-list">{renderTree()}</ul>
       </div>
     </TreeContext.Provider>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { getBin, updateBin } from "../api/treeApi";
 import {
   addLevelIdsToTree,
   alphabetiseTreeData,
@@ -12,6 +13,36 @@ export const useTree = (initialTreeData) => {
     addLevelIdsToTree(initialTreeData)
   );
   const [shouldAlphabetiseTree, setShouldAlphabetiseTree] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const fetchTreeData = useCallback(async () => {
+    try {
+      setLoading(true);
+      const currentTreeData = await getBin();
+      setTreeData(currentTreeData.record);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const updateTreeData = useCallback(async (updatedTreeData) => {
+    try {
+      setLoading(true);
+      await updateBin(updatedTreeData);
+    } catch {
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchTreeData();
+  }, [fetchTreeData]);
+
+  useEffect(() => {
+    updateTreeData(treeData);
+  }, [treeData, updateTreeData]);
 
   const addNode = (nodeName, nodeParentLevelId) => {
     const newNode = { node: nodeName, children: [] };
@@ -48,5 +79,6 @@ export const useTree = (initialTreeData) => {
     deleteNode,
     alphabetiseTree,
     shouldAlphabetiseTree,
+    loading,
   };
 };
