@@ -22,3 +22,29 @@ li {
 .root-list > li:first-child {
   margin-top: 0;
 }
+
+.indentation-level-1,
+.indentation-level-2,
+.indentation-level-3,
+.indentation-level-4 {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 0.5px;
+  background-color: black;
+}
+.indentation-level-1 {
+  left: 20px;
+}
+
+.indentation-level-2 {
+  left: 58px;
+}
+
+.indentation-level-3 {
+  left: 96px;
+}
+
+.indentation-level-4 {
+  left: 134px;
+}
