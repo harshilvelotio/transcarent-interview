@@ -31,6 +31,7 @@ const TreeNode = ({ node, children, level, levelId }) => {
             />
           ))}
         <li>
+          {/** The input below will allow adding new nested levels */}
           <input
             value={newNodeVal}
             onChange={(e) => setNewNodeVal(e.currentTarget.value)}
