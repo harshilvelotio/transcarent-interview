@@ -1,30 +1,15 @@
 import "./index.css";
+import TreeNode from "./TreeNode";
+const treeData = require("./data.json");
 
 export default function Tree() {
+  const renderTree = () =>
+    treeData.map((currentTreeData) => <TreeNode {...currentTreeData} />);
+
   return (
     <>
       <div className="tree">
-        <ul className="root-list">
-          <li>
-            <span>root</span>
-            <ul>
-              <li>ant</li>
-              <li>
-                <span>bear</span>
-                <ul>
-                  <li>cat</li>
-                  <li>
-                    <span>dog</span>
-                    <ul>
-                      <li>elephant</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>frog</li>
-            </ul>
-          </li>
-        </ul>
+        <ul className="root-list">{renderTree()}</ul>
       </div>
     </>
   );
