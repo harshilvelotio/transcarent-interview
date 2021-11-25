@@ -3,5 +3,6 @@
 2. `cd trees`
 3. Run `npm install`
 4. Run `npm start`
+5. Copy `.env.development` file shared over email to `trees` directory
 5. Open http://localhost:3000/ to see your app.
 6. Follow the instructions in your browser. 
